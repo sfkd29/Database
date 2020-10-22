@@ -25,7 +25,7 @@ public class Sgbd {
             se.printStackTrace();
         }
         
-        	//Creation des tables
+       //Creation des tables
         
         try{
         	final String url = "jdbc:mysql://localhost:3306/biblio";
@@ -80,7 +80,7 @@ public class Sgbd {
             throwables.printStackTrace();
         }
         
-        //Insertion de données
+        //INSERTION DES DONNEES
         
         try{
         	final String url = "jdbc:mysql://localhost:3306/biblio";
@@ -120,7 +120,7 @@ public class Sgbd {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        //SELCTION DES DONNEES
+        //SELECTION DES DONNEES
         try{
             final String url = "jdbc:mysql://localhost:3306/biblio";
             Class.forName("com.mysql.jdbc.Driver");
