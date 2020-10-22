@@ -76,6 +76,45 @@ public class Sgbd {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        
+        try{
+        	final String url = "jdbc:mysql://localhost:3306/biblio";
+            Class.forName("com.mysql.jdbc.Driver");
+
+            System.out.println("Connecting to a selected database...");
+            conn = DriverManager.getConnection(url, username, password);
+            System.out.println("Connected database successfully...");
+
+            System.out.println("Insertion de données");
+            stmt = conn.createStatement();
+
+            String sql = "INSERT INTO classe " +
+                    "VALUES ('class1', 'first class', 18)";
+            stmt.executeUpdate(sql);
+            System.out.println("Données enregistrées classe");
+
+            String sql2 = "INSERT INTO livre " +
+                    "VALUES ('miage_livre001', 'LA VIE A MIAGE', 'ASSALE', 'Recit',5000)";
+            stmt.executeUpdate(sql2);
+            System.out.println("Données enregistrées livre");
+
+            String sql3 = "INSERT INTO etudiant " +
+                    "VALUES('etu001', 'BOUEDIRO', 'STEVE', 'M','class1')";
+            stmt.executeUpdate(sql3);
+            System.out.println("Données enregistrées etudiant");
+
+            String sql1 = "INSERT INTO emprunt  " +
+                    "VALUES ('etu001', 'miage_livre001', '2020-10-20 13:00:00', '2020-10-27 13:00:00')";
+            stmt.executeUpdate(sql1);
+            System.out.println("Données enregistrées emprunt");
+
+            System.out.println("Données enregistrées");
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
 }

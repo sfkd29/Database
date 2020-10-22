@@ -75,5 +75,39 @@ public class Sgdb {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+
+            System.out.println("Connecting to a selected database...");
+            conn = DriverManager.getConnection(url, username, password);
+            System.out.println("Connected database successfully...");
+
+            System.out.println("Insertion de données");
+            stmt = conn.createStatement();
+
+            String sql = "INSERT INTO classe " +
+                    "VALUES ('class1', 'first class', 18)";
+            stmt.executeUpdate(sql);
+
+            String sql2 = "INSERT INTO livre " +
+                    "VALUES ('miage_livre0001', 'LA VIE A MIAGE', 'Recit', 5000)";
+            stmt.executeUpdate(sql2);
+
+            String sql3 = "INSERT INTO etudiant " +
+                    "VALUES('etu001', 'BOUEDIRO', 'STEVE', 'M','class1')";
+            stmt.executeUpdate(sql3);
+
+            String sql1 = "INSERT INTO emprunt  " +
+                    "VALUES ('etu001', 'miage_livre0001', '2020-10-20 13:00:00', '2020-10-27 13:00:00')";
+            stmt.executeUpdate(sql1);
+
+            System.out.println("Données enregistrées");
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 }
