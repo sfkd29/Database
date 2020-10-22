@@ -120,7 +120,7 @@ public class Sgbd {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-
+        //SELCTION DES DONNEES
         try{
             final String url = "jdbc:mysql://localhost:3306/biblio";
             Class.forName("com.mysql.jdbc.Driver");
