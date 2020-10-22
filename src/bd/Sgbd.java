@@ -11,6 +11,7 @@ public class Sgbd {
     public static void main(String[] args) {
         Connection conn;
         Statement stmt;
+        //Creation de la base de données
         try {
             Class.forName("com.mysql.jdbc.Driver");
             System.out.println("Connecting to database...");
@@ -23,7 +24,9 @@ public class Sgbd {
         } catch (SQLException | ClassNotFoundException se) {
             se.printStackTrace();
         }
-
+        
+        	//Creation des tables
+        
         try{
         	final String url = "jdbc:mysql://localhost:3306/biblio";
             Class.forName("com.mysql.jdbc.Driver");
@@ -77,11 +80,13 @@ public class Sgbd {
             throwables.printStackTrace();
         }
         
+        //Insertion de données
+        
         try{
         	final String url = "jdbc:mysql://localhost:3306/biblio";
             Class.forName("com.mysql.jdbc.Driver");
 
-            System.out.println("Connecting to a selected database...");
+            System.out.println("Connection à la base de données");
             conn = DriverManager.getConnection(url, username, password);
             System.out.println("Connected database successfully...");
 
@@ -109,6 +114,89 @@ public class Sgbd {
             System.out.println("Données enregistrées emprunt");
 
             System.out.println("Données enregistrées");
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        try{
+            final String url = "jdbc:mysql://localhost:3306/biblio";
+            Class.forName("com.mysql.jdbc.Driver");
+
+            System.out.println("Connection à la base de données");
+            conn = DriverManager.getConnection(url, username, password);
+            System.out.println("Connected database successfully...");
+
+            System.out.println("Affichage de données");
+            stmt = conn.createStatement();
+
+            String sql = "SELECT code_cl, intitule, effectif FROM classe";
+            ResultSet rs = stmt.executeQuery(sql);
+            while(rs.next()){
+                String code_cl  = rs.getString("code_cl");
+                String intitule = rs.getString("intitule");
+                int effectif = rs.getInt("effectif");
+                System.out.println("CLASSE");
+                System.out.print("\n CODE: " + code_cl);
+                System.out.print(", INTITULE: " + intitule);
+                System.out.print(", EFFECTIF: " + effectif);
+            }
+            rs.close();
+
+            String sql1 = "SELECT code_liv, titre, auteur, genre, prix  FROM livre";
+            ResultSet rs1 = stmt.executeQuery(sql1);
+            while(rs1.next()){
+                String code_liv  = rs1.getString("code_liv");
+                String titre = rs1.getString("titre");
+                String auteur = rs1.getString("auteur");
+                String genre = rs1.getString("genre");
+                float prix = rs1.getFloat("prix");
+                System.out.println("LIVRE");
+                System.out.print("\n CODE: " + code_liv);
+                System.out.print(", TITRE: " + titre);
+                System.out.print(", AUTEUR: " + auteur);
+                System.out.print(", GENRE: " + genre);
+                System.out.print(", PRIX: " + prix);
+            }
+            rs1.close();
+
+            String sql2 = "SELECT matricule, nom, prenoms, sexe,code_cl FROM etudiant";
+            ResultSet rs2 = stmt.executeQuery(sql2);
+            while(rs2.next()){
+                String matricule  = rs2.getString("matricule");
+                String nom = rs2.getString("nom");
+                String prenoms = rs2.getString("prenoms");
+                String sexe = rs2.getString("sexe");
+                String code_cl  = rs2.getString("code_cl");
+
+                System.out.println("ETUDIANT");
+                System.out.print(" \n MATRICULE: " + matricule);
+                System.out.print(", NOM: " + nom);
+                System.out.print(", PRENOMS: " + prenoms);
+                System.out.print(", SEXE: " + sexe);
+                System.out.print(",CLASSE: " +code_cl );
+            }
+            rs2.close();
+
+            String sql3 = "SELECT matricule,code_liv, sortie, retour FROM emprunt";
+            ResultSet rs3 = stmt.executeQuery(sql3);
+            while(rs3.next()){
+                String matricule  = rs3.getString("matricule");
+                String code_liv = rs3.getString("code_liv");
+                String sortie = rs3.getString("sortie");
+                String retour = rs3.getString("retour");
+
+                System.out.println("EMPRUNT");
+                System.out.print("\n MATRICULE: " + matricule);
+                System.out.print(", CODE: " + code_liv);
+                System.out.print(", SORTIE: " + sortie);
+                System.out.print(", RETOUR: " + retour);
+            }
+            rs3.close();
+
+            System.out.println("\n Données affichées");
 
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
