@@ -1,8 +1,8 @@
 package bd;
 import java.sql.*;
 public class Sgbd {
-	
-	static final String driver = "com.mysql.jdbc.Driver";
+
+    static final String driver = "com.mysql.jdbc.Driver";
     static final String url = "jdbc:mysql://localhost:3306/";
 
     static final String username = "root";
@@ -24,11 +24,11 @@ public class Sgbd {
         } catch (SQLException | ClassNotFoundException se) {
             se.printStackTrace();
         }
-        
-       //Creation des tables
-        
+
+        //Creation des tables
+
         try{
-        	final String url = "jdbc:mysql://localhost:3306/biblio";
+            final String url = "jdbc:mysql://localhost:3306/biblio";
             Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection(url, username, password);
             System.out.println("Connection à la base de données réussie");
@@ -78,11 +78,11 @@ public class Sgbd {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        
+
         //INSERTION DES DONNEES
-        
+
         try{
-        	final String url = "jdbc:mysql://localhost:3306/biblio";
+            final String url = "jdbc:mysql://localhost:3306/biblio";
             Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection(url, username, password);
             System.out.println("Connection à la base de données réussie");
