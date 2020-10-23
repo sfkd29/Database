@@ -241,8 +241,6 @@ public class Sgbd {
 
             System.out.println("Connection à la base de données");
             conn = DriverManager.getConnection(url, username, password);
-            System.out.println("Connected database successfully...");
-
             System.out.println("Affichage de données après modification");
             stmt = conn.createStatement();
 
