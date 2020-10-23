@@ -84,8 +84,6 @@ public class Sgbd {
         try{
         	final String url = "jdbc:mysql://localhost:3306/biblio";
             Class.forName("com.mysql.jdbc.Driver");
-
-
             conn = DriverManager.getConnection(url, username, password);
             System.out.println("Connection à la base de données réussie");
 
@@ -115,6 +113,42 @@ public class Sgbd {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        //MODIFICATION DE DONNEES
+
+        try {
+            final String url = "jdbc:mysql://localhost:3306/biblio";
+            Class.forName("com.mysql.jdbc.Driver");
+            conn = DriverManager.getConnection(url, username, password);
+            System.out.println("Connection à la base de données réussie");
+
+            System.out.println("Début modification de données");
+            stmt = conn.createStatement();
+
+            String sql="UPDATE classe " +
+                    "SET intitule = 'Licence1' , effectif = 52 WHERE code_cl= 'class1' ";
+            stmt.executeUpdate(sql);
+
+            String sql1="UPDATE livre " +
+                    "SET titre = 'BDA',auteur = 'ASSALE ROGER' , prix = 4000 WHERE code_liv= 'miage_livre001' ";
+            stmt.executeUpdate(sql1);
+
+            String sql2="UPDATE etudiant " +
+                    "SET nom = 'COULIBALY', prenoms = 'VETCHO' , sexe = 'M' WHERE matricule= 'etu001' ";
+            stmt.executeUpdate(sql2);
+
+            String sql3="UPDATE emprunt " +
+                    "SET retour = '2020-11-25 13:00:00' WHERE matricule= 'etu001' AND code_liv = 'miage_livre001' AND sortie = '2020-10-20 13:00:00' ";
+            stmt.executeUpdate(sql3);
+            System.out.println("Données modifiees");
+
+
+        }catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+
         //SELECTION DES DONNEES
         try{
             final String url = "jdbc:mysql://localhost:3306/biblio";
