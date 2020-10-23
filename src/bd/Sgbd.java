@@ -14,7 +14,7 @@ public class Sgbd {
         //Creation de la base de données
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            System.out.println("Connecting to database...");
+            System.out.println("Connection au serveur");
             conn = DriverManager.getConnection(url, username, password);
             System.out.println("Creation de la base de données");
             stmt = conn.createStatement();
@@ -30,9 +30,8 @@ public class Sgbd {
         try{
         	final String url = "jdbc:mysql://localhost:3306/biblio";
             Class.forName("com.mysql.jdbc.Driver");
-            System.out.println("Connecting to a selected database...");
             conn = DriverManager.getConnection(url, username, password);
-            System.out.println("Connexion réussie");
+            System.out.println("Connection à la base de données réussie");
 
             stmt = conn.createStatement();
 
@@ -86,9 +85,9 @@ public class Sgbd {
         	final String url = "jdbc:mysql://localhost:3306/biblio";
             Class.forName("com.mysql.jdbc.Driver");
 
-            System.out.println("Connection à la base de données");
+
             conn = DriverManager.getConnection(url, username, password);
-            System.out.println("Connected database successfully...");
+            System.out.println("Connection à la base de données réussie");
 
             System.out.println("Insertion de données");
             stmt = conn.createStatement();
@@ -96,22 +95,18 @@ public class Sgbd {
             String sql = "INSERT INTO classe " +
                     "VALUES ('class1', 'first class', 18)";
             stmt.executeUpdate(sql);
-            System.out.println("Données enregistrées classe");
 
             String sql2 = "INSERT INTO livre " +
                     "VALUES ('miage_livre001', 'LA VIE A MIAGE', 'ASSALE', 'Recit',5000)";
             stmt.executeUpdate(sql2);
-            System.out.println("Données enregistrées livre");
 
             String sql3 = "INSERT INTO etudiant " +
                     "VALUES('etu001', 'BOUEDIRO', 'STEVE', 'M','class1')";
             stmt.executeUpdate(sql3);
-            System.out.println("Données enregistrées etudiant");
 
             String sql1 = "INSERT INTO emprunt  " +
                     "VALUES ('etu001', 'miage_livre001', '2020-10-20 13:00:00', '2020-10-27 13:00:00')";
             stmt.executeUpdate(sql1);
-            System.out.println("Données enregistrées emprunt");
 
             System.out.println("Données enregistrées");
 
@@ -139,9 +134,10 @@ public class Sgbd {
                 String intitule = rs.getString("intitule");
                 int effectif = rs.getInt("effectif");
                 System.out.println("CLASSE");
-                System.out.print("\n CODE: " + code_cl);
+                System.out.print(" CODE: " + code_cl);
                 System.out.print(", INTITULE: " + intitule);
                 System.out.print(", EFFECTIF: " + effectif);
+                System.out.print("\n ");
             }
             rs.close();
 
@@ -154,11 +150,12 @@ public class Sgbd {
                 String genre = rs1.getString("genre");
                 float prix = rs1.getFloat("prix");
                 System.out.println("LIVRE");
-                System.out.print("\n CODE: " + code_liv);
+                System.out.print(" CODE: " + code_liv);
                 System.out.print(", TITRE: " + titre);
                 System.out.print(", AUTEUR: " + auteur);
                 System.out.print(", GENRE: " + genre);
                 System.out.print(", PRIX: " + prix);
+                System.out.print(" \n");
             }
             rs1.close();
 
@@ -172,11 +169,12 @@ public class Sgbd {
                 String code_cl  = rs2.getString("code_cl");
 
                 System.out.println("ETUDIANT");
-                System.out.print(" \n MATRICULE: " + matricule);
+                System.out.print(" MATRICULE: " + matricule);
                 System.out.print(", NOM: " + nom);
                 System.out.print(", PRENOMS: " + prenoms);
                 System.out.print(", SEXE: " + sexe);
                 System.out.print(",CLASSE: " +code_cl );
+                System.out.print("\n ");
             }
             rs2.close();
 
@@ -189,7 +187,7 @@ public class Sgbd {
                 String retour = rs3.getString("retour");
 
                 System.out.println("EMPRUNT");
-                System.out.print("\n MATRICULE: " + matricule);
+                System.out.print("MATRICULE: " + matricule);
                 System.out.print(", CODE: " + code_liv);
                 System.out.print(", SORTIE: " + sortie);
                 System.out.print(", RETOUR: " + retour);
